@@ -40,7 +40,7 @@ public class AccountLogginController {
 		if (foundAccount == null) {
 			accountLogginRepository.save(account);
 		} else {
-			System.out.println("Username is already taken");
+			System.err.println("Username already exist in DB");
 		}
 	}
 	
