@@ -2,10 +2,10 @@ package fr.hamterro.back_spring_user.repositories;
 
 import org.springframework.data.repository.CrudRepository;
 
-import fr.hamterro.back_spring_user.models.user.AccountLoggin;
+import fr.hamterro.back_spring_user.models.user.AccountLogin;
 
-public interface AccountLogginRepository extends CrudRepository<AccountLoggin, Long>{
+public interface AccountLogginRepository extends CrudRepository<AccountLogin, Long>{
 	
-	public AccountLoggin findByUsername(String username);
+	public AccountLogin findByUsername(String username);
 	
 }
