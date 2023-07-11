@@ -12,35 +12,34 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import fr.hamterro.back_spring_user.models.user.AccountLoggin;
+import fr.hamterro.back_spring_user.models.user.AccountLogin;
 import fr.hamterro.back_spring_user.repositories.AccountLogginRepository;
 
 @RestController
 @RequestMapping(path="/api/account")
-public class AccountLogginController {
+public class AccountLoginController {
 	
 	@Autowired
 	private AccountLogginRepository accountLogginRepository;
 	
 	@GetMapping(path="/all")
-	public Iterable<AccountLoggin> getAllAccountLoggins(){
+	public Iterable<AccountLogin> getAllAccountLoggins(){
 		return accountLogginRepository.findAll();
 	}
 	
 	@GetMapping(path="/search/{username}")
-	public AccountLoggin getAccountLogginByUsername(@PathVariable String username){
+	public AccountLogin getAccountLogginByUsername(@PathVariable String username){
 		return accountLogginRepository.findByUsername(username);
 	}
 	
 	@PostMapping(path="/create")
-	public void createProduit(@Valid @RequestBody AccountLoggin account) {
+	public void createProduit(@Valid @RequestBody AccountLogin account) {
 		
-		AccountLoggin foundAccount = accountLogginRepository.findByUsername(account.getUsername());
-		
-		if (foundAccount == null) {
+		AccountLogin foundAccount = accountLogginRepository.findByUsername(account.getUsername());
+		if (foundAccount == null && account.getUsername() != null && account.getUsername() != "" && account.getPassword() != null && account.getPassword() != "") {
 			accountLogginRepository.save(account);
 		} else {
-			System.err.println("Username already exist in DB");
+			System.err.println("Error when creating an account");
 		}
 	}
 	
