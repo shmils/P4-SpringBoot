@@ -1,0 +1,23 @@
+version: "2"
+services:
+  springboot:
+    build: .
+    depends_on:
+      - mysql
+    environment:
+      MYSQL_USR: "root"
+      MYSQL_PWD: "root"
+      MYSQL_HOST: "mysql"
+      MYSQL_PORT: "3306"
+      MYSQL_DB: "hamterro_db"
+    ports:
+      - "8080:8080"
+
+  mysql:
+    image: mysql:5.7
+    ports:
+      - "32000:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - ./db:/docker-entrypoint-initdb.d/:ro
